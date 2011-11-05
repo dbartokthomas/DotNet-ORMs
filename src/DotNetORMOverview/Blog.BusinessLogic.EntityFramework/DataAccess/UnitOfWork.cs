@@ -27,7 +27,7 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
                     return _userRepository;
 
                 //Create the repo for this class
-                _userRepository = new User();
+                _userRepository = new User(_context);
 
                 //Return it
                 return _userRepository;
@@ -40,6 +40,9 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
         /// </summary>
         public UnitOfWork(string connString)
         {
+            if (string.IsNullOrEmpty(connString))
+                throw new ArgumentNullException("connString cannot be empty");
+
             _context = new BlogContext(connString);
         }
 

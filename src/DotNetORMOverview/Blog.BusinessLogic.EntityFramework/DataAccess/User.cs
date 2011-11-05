@@ -8,6 +8,19 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
 {
     public class User : IUser
     {
+        /// <summary>
+        /// Backing store for the Context, so we can query the DB
+        /// </summary>
+        BlogContext _context;
+
+        public User(BlogContext context)
+        {
+            if (context == null)
+                throw new ArgumentNullException("context cannot be null");
+
+            _context = context;
+        }
+
         public Model.User GetUserByUsername(string username)
         {
             throw new NotImplementedException();
