@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\Interfaces\IContext.cs" />
     <Compile Include="DataAccess\Interfaces\IRepository.cs" />
     <Compile Include="DataAccess\Interfaces\IUser.cs" />
     <Compile Include="DataAccess\Interfaces\IUnitOfWork.cs" />

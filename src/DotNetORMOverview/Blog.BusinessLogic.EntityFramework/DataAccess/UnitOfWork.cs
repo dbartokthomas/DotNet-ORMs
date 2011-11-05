@@ -8,6 +8,9 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private BlogContext _context;
+
+        #region Repositories
         /// <summary>
         /// Backing store for the User Repository
         /// </summary>
@@ -30,13 +33,14 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
                 return _userRepository;
             }
         }
+        #endregion
 
         /// <summary>
         /// Create the UnitOfWork
         /// </summary>
         public UnitOfWork(string connString)
-        { 
-            
+        {
+            _context = new BlogContext(connString);
         }
 
         /// <summary>
