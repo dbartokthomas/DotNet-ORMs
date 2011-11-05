@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Blog.BusinessLogic.DataAccess.Interfaces
 {
-    public interface IUser : IRepository<Model.User>
+    public interface IRepository<T>
     {
-        Model.User GetUserByUsername(string username);
+        T GetByKey<TType>(TType t);
     }
 }
