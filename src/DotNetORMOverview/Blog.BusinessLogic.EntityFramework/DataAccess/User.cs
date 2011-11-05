@@ -23,7 +23,9 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
 
         public Model.User GetUserByUsername(string username)
         {
-            throw new NotImplementedException();
+            return (from user in _context.Set<Model.User>()
+                    where user.Username.ToLower() == username.ToLower()
+                    select user).SingleOrDefault();
         }
 
         public Model.User GetByKey<TType>(TType t)
