@@ -6,7 +6,7 @@ using Blog.BusinessLogic.DataAccess.Interfaces;
 
 namespace Blog.BusinessLogic.EntityFramework.DataAccess
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private BlogContext _context;
 
@@ -53,6 +53,14 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
         public bool SaveChanges()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Dispose of the context
+        /// </summary>
+        public void Dispose()
+        {
+            _context.Dispose();
         }
     }
 }

@@ -11,7 +11,13 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
         public BlogContext(string connectionString)
             : base(connectionString)
         {
+        }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new DataAccess.Mapping.User());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
