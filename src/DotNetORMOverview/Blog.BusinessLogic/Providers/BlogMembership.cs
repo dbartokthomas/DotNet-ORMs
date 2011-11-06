@@ -15,6 +15,8 @@ namespace Blog.BusinessLogic.Providers
         {
             if (uow == null)
                 throw new ArgumentNullException("UnitOfWork cannot be null!");
+
+            _unitOfWork = uow;
         }
 
         public override string ApplicationName
@@ -39,9 +41,46 @@ namespace Blog.BusinessLogic.Providers
             throw new NotImplementedException();
         }
 
+        //protected abstract IUser CreateUser(string username, string password, string email);
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
-            throw new NotImplementedException();
+            bool create = true;
+            MembershipCreateStatus createStatus = MembershipCreateStatus.Success;
+
+            //Make sure this user doesn't already exist
+            if (_unitOfWork.UserRepository.UserExists(username))
+            {
+                createStatus = MembershipCreateStatus.DuplicateUserName;
+                create = false;
+            }
+
+            if (_unitOfWork.UserRepository.EmailExists(email))
+            {
+                createStatus = MembershipCreateStatus.DuplicateEmail;
+                create = false;
+            }
+
+            //Create the new User
+            if (create)
+            {
+                Model.User newUser = new Model.User();
+                newUser.EmailAddress = email;
+                newUser.Username = username;
+                newUser.Password = password;
+                
+                //Add the new user
+                _unitOfWork.UserRepository.AddNewUser(newUser);
+
+                //Save the changes
+                if (_unitOfWork.SaveChanges())
+                { 
+                    //Return a nice MembershipUser
+                    
+                }
+            }
+
+            status = createStatus;
+            return null;
         }
 
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
@@ -111,7 +150,7 @@ namespace Blog.BusinessLogic.Providers
 
         public override int MinRequiredPasswordLength
         {
-            get { throw new NotImplementedException(); }
+            get { return 6; }
         }
 
         public override int PasswordAttemptWindow
@@ -156,7 +195,7 @@ namespace Blog.BusinessLogic.Providers
 
         public override bool ValidateUser(string username, string password)
         {
-            throw new NotImplementedException();
+            return _unitOfWork.UserRepository.ValidateUser(username, password);
         }
     }
 }

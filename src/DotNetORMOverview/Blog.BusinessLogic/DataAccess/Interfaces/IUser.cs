@@ -10,5 +10,9 @@ namespace Blog.BusinessLogic.DataAccess.Interfaces
         Model.User GetUserByUsername(string username);
 
         bool ValidateUser(string username, string password);
+        bool UserExists(string username);
+        bool EmailExists(string email);
+
+        void AddNewUser(Model.User user);
     }
 }

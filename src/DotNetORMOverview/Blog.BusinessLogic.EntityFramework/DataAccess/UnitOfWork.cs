@@ -52,7 +52,7 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
         /// <returns></returns>
         public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            return _context.SaveChanges() > 0;
         }
 
         /// <summary>
