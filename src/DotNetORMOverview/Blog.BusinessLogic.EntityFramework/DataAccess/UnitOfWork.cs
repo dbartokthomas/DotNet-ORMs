@@ -6,7 +6,7 @@ using Blog.BusinessLogic.DataAccess.Interfaces;
 
 namespace Blog.BusinessLogic.EntityFramework.DataAccess
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
         private BlogContext _context;
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blog.BusinessLogic.DataAccess.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         /// <summary>
         /// Repository for the User class
