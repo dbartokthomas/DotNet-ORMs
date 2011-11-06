@@ -54,7 +54,7 @@
     <Compile Include="DataAccess\Interfaces\IUnitOfWork.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\Membership.cs" />
+    <Compile Include="Providers\BlogMembership.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Security;
+using Blog.BusinessLogic.DataAccess.Interfaces;
 
-namespace Blog.BusinessLogic
+namespace Blog.BusinessLogic.Providers
 {
-    public class Membership : MembershipProvider
+    public abstract class BlogMembership : MembershipProvider
     {
+        IUnitOfWork _unitOfWork;
+        
+        protected BlogMembership(IUnitOfWork uow)
+        {
+            if (uow == null)
+                throw new ArgumentNullException("UnitOfWork cannot be null!");
+        }
+
         public override string ApplicationName
         {
             get
