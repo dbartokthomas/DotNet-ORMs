@@ -32,5 +32,12 @@ namespace Blog.BusinessLogic.EntityFramework.DataAccess
         {
             throw new NotImplementedException();
         }
+
+        public bool ValidateUser(string username, string password)
+        {
+            return (from user in _context.Set<Model.User>()
+                    where user.Username.ToLower() == username.ToLower() && user.Password == password
+                    select user).Count() > 0; 
+        }
     }
 }
